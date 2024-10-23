@@ -1,0 +1,20 @@
+jobs:
+  job1:
+    name: "job_name"
+    runs-on:
+      container-image: "registry.houzhiqiang.cn/golang:1.22"
+    steps:
+      - name: "step1"
+        run:
+          - "sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources"
+          - "apt-get update"
+          - "apt-get install -y build-essential tcl git"
+      - name: "build"
+        run:
+          - "export https_proxy=192.168.31.229:20171"
+          - "git clone https://github.com/redis/redis.git"
+          - "cd redis/src"
+          - "make -j4"
+      - name: "clean"
+        run:
+          - "rm -rf redis"
