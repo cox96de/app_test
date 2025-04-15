@@ -1,0 +1,14 @@
+jobs:
+
+  vm:
+    name: "CompileRedis"
+    runs-on:
+      image: "winserver2019"
+    steps:
+      - name: "install dependencies"
+        run:
+          - 'Write-Host "Hello World"'
+          - Get-DnsClientServerAddress -AddressFamily IPv4
+          - Resolve-DnsName proxy.golang.org
+          - $env:HTTPS_PROXY = "192.168.31.229:20171"
+          - curl https://proxy.golang.org
